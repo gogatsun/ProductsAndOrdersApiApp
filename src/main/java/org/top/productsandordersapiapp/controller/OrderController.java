@@ -1,6 +1,5 @@
 package org.top.productsandordersapiapp.controller;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.*;
 
 import org.top.productsandordersapiapp.entity.Order;
@@ -35,7 +34,7 @@ public class OrderController {
 
     @GetMapping("client/{id}")
     public List<Order> getByClientId(@PathVariable Integer id) {
-        return orderService.getByClientId(id);
+        return orderService.getAllByClientId(id);
     }
 
     @PostMapping("update")

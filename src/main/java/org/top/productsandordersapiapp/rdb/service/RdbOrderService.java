@@ -42,7 +42,7 @@ public class RdbOrderService implements OrderService {
     }
 
     @Override
-    public List<Order> getByClientId(Integer id) { // получить заказы по id клиента
+    public List<Order> getAllByClientId(Integer id) { // получить заказы по id клиента
         Optional<Client> client = clientRepository.findById(id);
         if (client.isPresent()) {
             return orderRepository.findOrdersByClient_Id(id);
@@ -61,6 +61,12 @@ public class RdbOrderService implements OrderService {
             return Optional.of(orderRepository.save(newOrder));
 
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Order> update(Integer id, String description) {
+        //Optional<Order> updated = orderRepository.findById(id);
         return Optional.empty();
     }
 }
