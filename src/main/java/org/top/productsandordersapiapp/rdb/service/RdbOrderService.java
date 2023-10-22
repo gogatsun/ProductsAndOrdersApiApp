@@ -51,22 +51,12 @@ public class RdbOrderService implements OrderService {
     }
 
     @Override
-    public Optional<Order> update(Order order) {
-        Optional<Order> updated = orderRepository.findById(order.getId());
-        if (updated.isPresent()) {
-            Order newOrder = new Order();
-            newOrder.setId(updated.get().getId());
-            newOrder.setDescription(order.getDescription());
-            newOrder.setClient(updated.get().getClient());
-            return Optional.of(orderRepository.save(newOrder));
-
-        }
-        return Optional.empty();
-    }
-
-    @Override
     public Optional<Order> update(Integer id, String description) {
-        //Optional<Order> updated = orderRepository.findById(id);
-        return Optional.empty();
+        Optional<Order> updated = getById(id);
+        if (updated.isPresent()) {
+            updated.get().setDescription(description);
+            orderRepository.save(updated.get());
+        }
+        return updated;
     }
 }
